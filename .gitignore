@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+.vitest/
+examples/feed.xml
+
+.env
+.env.*
+!.env.example
+
+PROGRESS.md

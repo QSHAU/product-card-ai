@@ -1,0 +1,13 @@
+<offer id="207205" available="true" group_id="7878">
+    <name>СВ01-24.Н.Р</name>
+    <typePrefix>счетчик времени наработки оборудования</typePrefix>
+    <url>https://www.souz-pribor.ru/product/sv01/</url>
+    <categoryId>325</categoryId>
+    <vendor>ОВЕН</vendor>
+    <vendorCode>43487</vendorCode>
+    <picture>https://www.souz-pribor.ru/upload/iblock/924/eu335o4flluq67nzsiuapbizval92yvw/SV01_30_06_22_1.jpg</picture>
+    <price>7076</price>
+    <currencyId>RUR</currencyId>
+    <param name="Артикул">43487</param>
+    <param name="Код товара">75576</param>
+</offer>
