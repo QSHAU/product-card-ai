@@ -179,4 +179,47 @@ describe("POST /generate: проверка входных данных", () => {
       message: "Не удалось получить корректный черновик карточки",
     });
   });
+
+  it("возвращает 400 при синтаксически некорректном JSON", async () => {
+    const response = await app.inject({
+      method: "POST",
+      url: "/generate",
+      headers: {
+        "content-type": "application/json",
+      },
+      payload: '{"name":',
+    });
+
+    expect(response.statusCode).toBe(400);
+    expect(generateText).not.toHaveBeenCalled();
+  });
+
+  it("помечает пустые характеристики и сохраняет числовой ноль", async () => {
+    const response = await app.inject({
+      method: "POST",
+      url: "/generate",
+      payload: {
+        name: "Манометр",
+        manufacturer: "Манотомь",
+        description: "Прибор для измерения давления.",
+        specs: {
+          "класс точности": null,
+          питание: "   ",
+          "нижняя граница": 0,
+        },
+      },
+    });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.json()).toMatchObject({
+      status: "draft",
+      characteristics: [
+        { name: "класс точности", value: "данных нет" },
+        { name: "питание", value: "данных нет" },
+        { name: "нижняя граница", value: "0" },
+      ],
+      missing_fields: ["specs.класс точности", "specs.питание"],
+    });
+    expect(generateText).toHaveBeenCalledTimes(1);
+  });
 });
